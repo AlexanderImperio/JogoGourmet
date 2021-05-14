@@ -12,8 +12,8 @@ public class Comida {
 		return caracteristicas;
 	}
 
-	public void setCaracteristica(List<String> caracteristicas) {
-		this.caracteristicas = caracteristicas;
+	public void setCaracteristica(String caracteristicas) {
+		this.caracteristicas.add(caracteristicas);
 	}
 
 	public String getNome() {
