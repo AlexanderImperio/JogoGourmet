@@ -4,16 +4,16 @@ import java.util.List;
 
 public class Comida {
 
-	private List<Caracteristica> caracteristica;
+	private List<String> caracteristicas;
 	
 	private  String nome;
 
-	public List<Caracteristica> getCaracteristica() {
-		return caracteristica;
+	public List<String> getCaracteristicas() {
+		return caracteristicas;
 	}
 
-	public void setCaracteristica(List<Caracteristica> caracteristica) {
-		this.caracteristica = caracteristica;
+	public void setCaracteristica(List<String> caracteristicas) {
+		this.caracteristicas = caracteristicas;
 	}
 
 	public String getNome() {
@@ -24,9 +24,9 @@ public class Comida {
 		this.nome = nome;
 	}
 
-	public Comida(List<Caracteristica> caracteristica, String nome) {
+	public Comida(List<String> caracteristica, String nome) {
 		super();
-		this.caracteristica = caracteristica;
+		this.caracteristicas = caracteristica;
 		this.nome = nome;
 	}
 	
