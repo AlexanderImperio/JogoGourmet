@@ -10,19 +10,18 @@ import javax.swing.JOptionPane;
 
 public class AdivinharComida {
 
-	private static List<Comida> comidas = new ArrayList<Comida>();
-	private static Integer result;
-	private static Integer achou;
-	private static String novaComida;
-	private static String novaCaracteristica;
-	private static Boolean acertei;
-	private static List<Comida> sortComidas = new ArrayList<Comida>();
-	private static List<Comida> comidasRestantes = new ArrayList<Comida>();
-	private static List<String> caracteristicasAdicionais = new ArrayList<String>();
-	private static List<String> caracteristicasRestantes = new ArrayList<String>();
-	private static List<String> caracteristicas = new ArrayList<String>();
+	private List<Comida> comidas = new ArrayList<Comida>();
+	private Integer result;
+	private Integer achou;
+	private String novaComida;
+	private String novaCaracteristica;
+	private List<Comida> sortComidas = new ArrayList<Comida>();
+	private List<Comida> comidasRestantes = new ArrayList<Comida>();
+	private List<String> caracteristicasAdicionais = new ArrayList<String>();
+	private List<String> caracteristicasRestantes = new ArrayList<String>();
+	private List<String> caracteristicas = new ArrayList<String>();
 
-	public static void main(String[] args) {
+	public void iniciarJogoGormet() {
 
 		inicializarComidas();
 		result = JOptionPane.OK_OPTION;
@@ -31,7 +30,6 @@ public class AdivinharComida {
 			sortComidas.addAll(comidas);
 			comidasRestantes.addAll(comidas);
 			caracteristicasRestantes.addAll(caracteristicas);
-			caracteristicasAdicionais.clear();
 
 			JOptionPane.showMessageDialog(null, "Pense em um prato que gosta");
 
@@ -92,7 +90,7 @@ public class AdivinharComida {
 
 	}
 
-	public static void inicializarComidas() {
+	public void inicializarComidas() {
 
 		List<String> caracteristicas1 = new ArrayList<String>();
 		List<String> caracteristicas2 = new ArrayList<String>();
@@ -112,7 +110,7 @@ public class AdivinharComida {
 
 	}
 
-	public static void adicionarComida() {
+	public void adicionarComida() {
 		novaComida = JOptionPane.showInputDialog(null, "Em qual comida você pensou?");
 		if (Objects.nonNull(novaComida)) {
 			novaCaracteristica = JOptionPane.showInputDialog(null,
@@ -126,7 +124,7 @@ public class AdivinharComida {
 
 	}
 
-	public static void verificarCaracteristicasRestante(String validacaracteristica) {
+	public void verificarCaracteristicasRestante(String validacaracteristica) {
 		for (Comida comidaResntante : comidasRestantes) {
 			for (String caracteristicaRestante : comidaResntante.getCaracteristicas()) {
 				if (!validacaracteristica.equals(caracteristicaRestante)) {
@@ -138,7 +136,7 @@ public class AdivinharComida {
 		}
 	}
 
-	public static Boolean verificaComidasRestantes() {
+	public Boolean verificaComidasRestantes() {
 		Boolean res;
 
 		if (comidasRestantes.size() == 1 || caracteristicasRestantes.size() == 1) {
@@ -166,6 +164,14 @@ public class AdivinharComida {
 							return false;
 						}
 
+					} else {
+						achou = showDialog("O prato que você pensou é  " + comidasRestantes.get(1).getNome() + "?");
+						res = comidaCorreta(achou);
+						if (res) {
+							return true;
+						} else {
+							return false;
+						}
 					}
 				} else if (achou.equals(JOptionPane.NO_OPTION)) {
 					adicionarComida();
@@ -179,19 +185,25 @@ public class AdivinharComida {
 		return false;
 	}
 
-	public static String caracteristicaDistinta() {
+	public String caracteristicaDistinta() {
 		List<String> caracteristcas1 = comidasRestantes.get(0).getCaracteristicas();
 		List<String> caracteristcas2 = comidasRestantes.get(1).getCaracteristicas();
-
+		
 		for (String nome : caracteristcas1) {
 			if (!caracteristcas2.contains(nome)) {
+				return nome;
+			}
+		}
+		
+		for (String nome : caracteristcas2) {
+			if (!caracteristcas1.contains(nome)) {
 				return nome;
 			}
 		}
 		return null;
 	}
 
-	public static Boolean comidaCorreta(Integer res) {
+	public Boolean comidaCorreta(Integer res) {
 		if (res.equals(JOptionPane.OK_OPTION)) {
 			JOptionPane.showMessageDialog(null, "Acertei de novo!");
 			return true;
@@ -203,13 +215,13 @@ public class AdivinharComida {
 		}
 	}
 
-	public static Integer showDialog(String message) {
+	public Integer showDialog(String message) {
 		Integer res;
 		res = JOptionPane.showConfirmDialog(null, message);
 		return res;
 	}
 
-	public static void limpar() {
+	public void limpar() {
 		sortComidas.clear();
 		comidasRestantes.clear();
 		achou = null;
@@ -217,6 +229,7 @@ public class AdivinharComida {
 		novaCaracteristica = null;
 		caracteristicasRestantes.clear();
 		result = null;
+		caracteristicasAdicionais = new ArrayList<String>();
 	}
 
 }
