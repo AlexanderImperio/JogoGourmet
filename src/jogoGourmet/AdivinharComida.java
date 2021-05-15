@@ -85,8 +85,8 @@ public class AdivinharComida {
 
 			limpar();
 
-		} while (Objects.isNull(result)
-				|| (result != JOptionPane.CANCEL_OPTION && result != JOptionPane.CLOSED_OPTION));
+		} while (Objects.nonNull(result)
+				&& (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION));
 
 	}
 
@@ -119,7 +119,7 @@ public class AdivinharComida {
 			caracteristicasAdicionais.add(novaCaracteristica);
 			List<String> novasCaracteristicas = caracteristicasAdicionais;
 			comidas.add(new Comida(novasCaracteristicas, novaComida));
-			
+
 		}
 
 	}
@@ -174,8 +174,13 @@ public class AdivinharComida {
 						}
 					}
 				} else if (achou.equals(JOptionPane.NO_OPTION)) {
-					adicionarComida();
-					return false;
+					achou = showDialog("O prato que você pensou é  " + comidasRestantes.get(1).getNome() + "?");
+					res = comidaCorreta(achou);
+					if (res) {
+						return true;
+					} else {
+						return false;
+					}
 				}
 
 				return false;
@@ -188,13 +193,13 @@ public class AdivinharComida {
 	public String caracteristicaDistinta() {
 		List<String> caracteristcas1 = comidasRestantes.get(0).getCaracteristicas();
 		List<String> caracteristcas2 = comidasRestantes.get(1).getCaracteristicas();
-		
+
 		for (String nome : caracteristcas1) {
 			if (!caracteristcas2.contains(nome)) {
 				return nome;
 			}
 		}
-		
+
 		for (String nome : caracteristcas2) {
 			if (!caracteristcas1.contains(nome)) {
 				return nome;
