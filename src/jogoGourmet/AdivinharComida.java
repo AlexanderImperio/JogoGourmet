@@ -31,7 +31,7 @@ public class AdivinharComida {
 			comidasRestantes.addAll(comidas);
 			caracteristicasRestantes.addAll(caracteristicas);
 
-			JOptionPane.showMessageDialog(null, "Pense em um prato que gosta");
+			showMessage("Pense em um prato que gosta");
 
 			for (Comida sort : sortComidas) {
 				if (Objects.nonNull(achou)
@@ -40,7 +40,7 @@ public class AdivinharComida {
 				}
 				for (String caracteristica : caracteristicas) {
 
-					result = JOptionPane.showConfirmDialog(null, "O prato que você pensou é " + caracteristica + "?");
+					result = showDialog("O prato que você pensou é " + caracteristica + "?");
 
 					if (result.equals(JOptionPane.NO_OPTION)) {
 
@@ -143,7 +143,7 @@ public class AdivinharComida {
 			achou = showDialog("O prato que você pensou é  " + comidasRestantes.get(0).getNome() + "?");
 
 			if (achou.equals(JOptionPane.OK_OPTION)) {
-				JOptionPane.showMessageDialog(null, "Acertei de novo!");
+				showMessage("Acertei de novo!");
 			} else if (achou.equals(JOptionPane.NO_OPTION)) {
 				adicionarComida();
 			}
@@ -210,7 +210,7 @@ public class AdivinharComida {
 
 	public Boolean comidaCorreta(Integer res) {
 		if (res.equals(JOptionPane.OK_OPTION)) {
-			JOptionPane.showMessageDialog(null, "Acertei de novo!");
+			showMessage("Acertei de novo!");
 			return true;
 		} else if (res.equals(JOptionPane.NO_OPTION)) {
 			adicionarComida();
@@ -224,6 +224,10 @@ public class AdivinharComida {
 		Integer res;
 		res = JOptionPane.showConfirmDialog(null, message);
 		return res;
+	}
+	
+	public void showMessage(String message) {
+		JOptionPane.showMessageDialog(null, message);
 	}
 
 	public void limpar() {
